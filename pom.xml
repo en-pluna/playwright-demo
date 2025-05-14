@@ -11,7 +11,7 @@
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
-            <version>1.44.0</version> <!-- versión actual -->
+            <version>1.44.0</version>
         </dependency>
     </dependencies>
 
@@ -22,10 +22,9 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass>com.saucedemo.test.App</mainClass>
+                    <mainClass>com.saucedemo.tests.LoginTest</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 </project>
-

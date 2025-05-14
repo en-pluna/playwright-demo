@@ -1,4 +1,4 @@
-package com.saucedemo.test;
+package com.saucedemo.tests;
 
 import com.microsoft.playwright.*;
 
