@@ -15,4 +15,23 @@ public class LoginTest extends TestBase {
 
         assertTrue(loginPage.isOnInventoryPage(), "El login no redireccionó correctamente.");
     }
+
+    @Test
+    public void testLoginWrongPass(){
+        LoginPage loginPage = new LoginPage(page);
+        loginPage.navigateTo();
+        loginPage.login("standard_user", "wrong_pass");
+
+        assertTrue(loginPage.errorMessage().contains("Username and password do not match any user in this service"));
+    }
+
+    @Test
+    public void testLoginEmptyFields(){
+        LoginPage loginPage = new LoginPage(page);
+        loginPage.navigateTo();
+        loginPage.login("", "");
+
+        assertTrue(loginPage.errorMessage().contains("Epic sadface: Username is required"));
+    }
+
 }
