@@ -8,6 +8,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class LoginTest extends TestBase {
 
     @Test
+    public void testLoginPage() {
+        LoginPage loginPage = new LoginPage(page);
+        loginPage.navigateTo();
+
+        // Verify the title of the page
+        String title = page.title();
+        assertTrue(title.equals("Swag Labs"), "El título de la página no es correcto.");
+
+        // Verify the URL of the page
+        String url = page.url();
+        assertTrue(url.contains("saucedemo.com"), "La URL de la página no es correcta.");
+    }
+
+    @Test
     public void testLoginExitoso() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
