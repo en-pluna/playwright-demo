@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 
 public class AddToCartTest extends TestBase {
 
@@ -23,22 +24,22 @@ public class AddToCartTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US02 - TC1 - Add product to cart and verify in cart")
     public void testAgregarProductoYVerEnCarrito() {
-        // Agregar primer producto
+        // Add first product
         Locator firstProduct = cartPage.getInventoryProductNames().first();
         String expectedProductName = firstProduct.innerText();
         cartPage.getAddToCartButtons().first().click();
-
-        // Ir al carrito
+        // Go to cart
         cartPage.openCart();
-
-        // Validar
+        // Validate
         assertTrue(cartPage.isProductInCart(expectedProductName), "El producto no está en el carrito.");
     }
 
     @Test
+    @DisplayName("US02 - TC2 - Add multiple products and verify badge and Remove button")
     public void testAgregarVariosProductosBadgeYRemove() {
-        // Agregar varios productos y validar badge y botón Remove
+        // Add more than one product and valide, badge and Remove button
         for (int i = 0; i < 3; i++) {
             cartPage.getAddToCartButtons().nth(i).click();
             assertTrue(cartPage.getRemoveFromCartButtons().count() == (i + 1), "El botón de eliminar no se muestra después de agregar un producto al carrito.");
@@ -47,17 +48,16 @@ public class AddToCartTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US02 - TC3 - Verify products added to cart are displayed in the cart")
     public void testProductosAgregadosEstanEnCarrito() {
-        // Agregar varios productos
+        // Add more than one product
         Locator products = cartPage.getInventoryProductNames();
         for (int i = 0; i < 3; i++) {
             cartPage.getAddToCartButtons().nth(i).click();
         }
-
-        // Ir al carrito
+        // Go to Cart
         cartPage.openCart();
-
-        // Validar que los productos están en el carrito
+        // Valide products are in cart
         for (int i = 0; i < 3; i++) {
             String expectedProductName = products.nth(i).innerText();
             assertTrue(cartPage.isProductInCart(expectedProductName), "El producto " + expectedProductName + " no está en el carrito.");

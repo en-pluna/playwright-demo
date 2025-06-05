@@ -5,9 +5,12 @@ import com.saucedemo.pages.LoginPage;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.DisplayName;
+
 public class LoginTest extends TestBase {
 
     @Test
+    @DisplayName("US01 - TC1 - Title and URL of the page")
     public void testLoginPage() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
@@ -22,6 +25,7 @@ public class LoginTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US01 - TC2 - Successful login with valid credentials")
     public void testLoginExitoso() {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
@@ -31,6 +35,7 @@ public class LoginTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US01 - TC3 - Login with invalid password")
     public void testLoginWrongPass(){
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
@@ -40,6 +45,7 @@ public class LoginTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US01 - TC4 - Login with empty fields")
     public void testLoginEmptyFields(){
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
@@ -47,5 +53,4 @@ public class LoginTest extends TestBase {
 
         assertTrue(loginPage.errorMessage().contains("Epic sadface: Username is required"));
     }
-
 }

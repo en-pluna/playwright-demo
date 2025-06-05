@@ -4,6 +4,7 @@ import com.saucedemo.base.TestBase;
 import com.saucedemo.pages.InventoryPage;
 import com.saucedemo.pages.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class InventorySortTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US02 - TC1 - Sort by name A-Z")
     public void testSortByNameAZ() {
         inventoryPage.selectSortOption("az");
         List<String> actual = inventoryPage.getProductNames();
@@ -34,6 +36,7 @@ public class InventorySortTest extends TestBase {
     }
 
     @Test
+    @DisplayName("US02 - TC2 - Sort by name Z-A")
     public void testSortByNameZA() {
         inventoryPage.selectSortOption("za");
         List<String> actual = inventoryPage.getProductNames();
