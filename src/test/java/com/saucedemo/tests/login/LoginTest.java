@@ -1,11 +1,16 @@
 package com.saucedemo.tests.login;
 
-import com.saucedemo.base.TestBase;
-import com.saucedemo.pages.LoginPage;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import com.saucedemo.base.TestBase;
+import com.saucedemo.pages.LoginPage;
 
 public class LoginTest extends TestBase {
 
@@ -34,22 +39,25 @@ public class LoginTest extends TestBase {
         assertTrue(loginPage.isOnInventoryPage(), "El login no redireccionó correctamente.");
     }
 
-    @Test
+    @ParameterizedTest(name = "Run: {index} - value: {arguments}")
+    @ValueSource(strings = {"wrong_pass", "123456", "abcdefg"})
     @DisplayName("US01 - TC3 - Login with invalid password")
-    public void testLoginWrongPass(){
+    public void testLoginWrongPass(String password) {
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
-        loginPage.login("standard_user", "wrong_pass");
+        loginPage.login("standard_user", password);
 
         assertTrue(loginPage.errorMessage().contains("Username and password do not match any user in this service"));
     }
 
-    @Test
+    @ParameterizedTest(name = "Run: {index} - value: {arguments}")
+    @EmptySource
+    @ValueSource(strings = {""})
     @DisplayName("US01 - TC4 - Login with empty fields")
-    public void testLoginEmptyFields(){
+    public void testLoginEmptyFields(String input){
         LoginPage loginPage = new LoginPage(page);
         loginPage.navigateTo();
-        loginPage.login("", "");
+        loginPage.login(input, input);
 
         assertTrue(loginPage.errorMessage().contains("Epic sadface: Username is required"));
     }
