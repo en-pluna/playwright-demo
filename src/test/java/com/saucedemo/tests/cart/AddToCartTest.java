@@ -33,7 +33,7 @@ public class AddToCartTest extends TestBase {
         // Go to cart
         cartPage.openCart();
         // Validate
-        assertTrue(cartPage.isProductInCart(expectedProductName), "El producto no está en el carrito.");
+        assertTrue(cartPage.isProductInCart(expectedProductName), "Product is not in the cart after adding it.");
     }
 
     @Test
@@ -42,8 +42,10 @@ public class AddToCartTest extends TestBase {
         // Add more than one product and valide, badge and Remove button
         for (int i = 0; i < 3; i++) {
             cartPage.getAddToCartButtons().nth(i).click();
-            assertTrue(cartPage.getRemoveFromCartButtons().count() == (i + 1), "El botón de eliminar no se muestra después de agregar un producto al carrito.");
-            assertTrue(cartPage.getBadgeCount().equals(String.valueOf(i + 1)), "El número de productos en el carrito no es correcto.");
+            assertTrue(cartPage.getRemoveFromCartButtons().count() == (i + 1),
+            "Remove button count is not correct after adding product " + (i + 1) + ".");
+            assertTrue(cartPage.getBadgeCount().equals(String.valueOf(i + 1)),
+            "Badge count is not correct after adding product " + (i + 1) + ".");
         }
     }
 
@@ -60,7 +62,8 @@ public class AddToCartTest extends TestBase {
         // Valide products are in cart
         for (int i = 0; i < 3; i++) {
             String expectedProductName = products.nth(i).innerText();
-            assertTrue(cartPage.isProductInCart(expectedProductName), "El producto " + expectedProductName + " no está en el carrito.");
+            assertTrue(cartPage.isProductInCart(expectedProductName),
+            "Product " + expectedProductName + " is not in the cart.");
         }
     }
 
